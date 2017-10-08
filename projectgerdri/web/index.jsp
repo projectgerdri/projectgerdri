@@ -15,14 +15,14 @@ and open the template in the editor.
             <div>
                 <span>lOGIN</span>
                     <span>
-                        <input type="text" name="usuario">
+                        <input type="text" name="user">
                     </span>
                     <span>
-                        <input type="text" name="usuario">
+                        <input type="text" name="pasword">
                     </span>
             </div>
             <div>
-                <button>enviar</button>
+                 <input class="btnGuardar" type="submit" value="Guardar">
 
 
             </div>

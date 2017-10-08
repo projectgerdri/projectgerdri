@@ -30,11 +30,16 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String user = (String) request.getParameter("precio");
-            String password = (String) request.getParameter("nombre");
-        }
+            //recojemos los parametros de inicio de sesión
+            String user = (String) request.getParameter("user");
+            String password = (String) request.getParameter("pasword");
+            
+            
+            if(password.length()>5){
+            response.sendRedirect(response.encodeRedirectURL("./profile/profile.jsp"));
+            }
+                    
+                    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
