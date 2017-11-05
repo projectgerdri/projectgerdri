@@ -1,10 +1,59 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Zona de pagina de login
 */
-/* 
-    Created on : 08-oct-2017, 12:50:40
-    Author     : Adri
-*/
+.fondo{
+    background: url("../img/fondo_standard.jpeg") no-repeat center center fixed;
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    /*background-size: cover;*/
+}
+.contenedora{
+    background-color: blanchedalmond;
+    margin: auto;
+    margin-top: 10vw;
+    width : 35%;
+    padding-bottom: 2%;
+    padding-top: 1%;
+    border-radius: 25px;
+    
+    
+    align-content: center;
+    text-align: center;
+    
+}
+.contenedora_username{
+    
+}
+.contenedora_password{
+    margin-top: 2%;
+}
+.contenedora_tabla{
+    display:table-cell;
+vertical-align:middle
+}
+.contenedora_login_facebook{
+    
+}
+.contenedora_login_twitter{
+    
+}
+.contenedora_login_google{
+    
+}
 
+/* para efectos
+
+.img {
+  width: 200px;
+  height: 200px;
+  border: 10px solid #fff;
+  -webkit-border-radius: 15px;
+   border-radius: 15px;
+  overflow: hidden;
+}
+ 
+.img:hover {
+  cursor: pointer;
+}
+*/

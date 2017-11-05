@@ -36,7 +36,7 @@ public class login extends HttpServlet {
             
             
             if(password.length()>5){
-            response.sendRedirect(response.encodeRedirectURL("./profile/profile.jsp"));
+            response.sendRedirect(response.encodeRedirectURL("./profile/profile.jsp#2#adria@gmail.com"));
             }
                     
                     
