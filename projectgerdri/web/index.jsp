@@ -59,12 +59,12 @@ and open the template in the editor.
 
             
         
-            <div>
+            <!--<div>
                 <input class="btnGuardar" type="submit" value="Guardar">
-                <!-- Botón de login de Facebook -->
+                <!-- Botón de login de Facebook 
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
                     
-                </div>
+            </div>-->
             </div>
         </form>
     </body>
