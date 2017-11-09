@@ -9,18 +9,21 @@ Zona de pagina de login
     /*background-size: cover;*/
 }
 .contenedora{
-    background-color: blanchedalmond;
+    background-color: greenyellow;
     margin: auto;
     margin-top: 10vw;
     width : 35%;
     padding-bottom: 2%;
     padding-top: 1%;
     border-radius: 25px;
-    
+    opacity: 0.4;
     
     align-content: center;
     text-align: center;
     
+}
+.contenedora_interior{
+    opacity: 1 !important;
 }
 .contenedora_username{
     
@@ -30,7 +33,7 @@ Zona de pagina de login
 }
 .contenedora_tabla{
     display:table-cell;
-vertical-align:middle
+    vertical-align:middle
 }
 .contenedora_login_facebook{
     

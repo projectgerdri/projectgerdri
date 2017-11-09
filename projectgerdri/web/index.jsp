@@ -14,23 +14,11 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body class="fondo">
-        <!--
+        
         <form action="login" id="data" method="post">
-            <div>
-                <span>lOGIN</span>
-                    <span>
-                        <input type="text" name="user">
-                    </span>
-                    <span>
-                        <input type="text" name="pasword">
-                    </span>
-            </div>
-                <input class="btnGuardar" type="submit" value="Guardar">
-            </form>
-            -->
-                 
-                    <!--div contendor de campos y botones-->
+        
                     <div class="contenedora">
+                        <div class="contenedora_interior">
                         <h2>Project GERDRI</h2>
                         <input class="" type="text" name="username" placeholder="Username"><br>
                         <input class="contenedora_password" type="password" name="password" placeholder="Password"><br>
@@ -48,14 +36,12 @@ and open the template in the editor.
                                 
                             </tr>
                         </table>
-                        
-                        
-                        
-                        
+                        </div>
                     </div>
                     
                     </div>
                     <!--fin div contenedor de campos y botones-->
+    </form>
 
             
         
