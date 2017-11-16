@@ -80,7 +80,7 @@ public class login extends HttpServlet {
         U_session.setAttribute("user_name", Uname);
         
         //cifrado del password
-        //
+        //caca
         //
         //////////////////////
         String query = "SELECT U_nickname, U_password, U_id FROM users";
