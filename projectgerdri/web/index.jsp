@@ -4,7 +4,18 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<%@page import="utils.*"%>
 <html>
+    <!-- Operational zone-->
+    <%
+        String language = request.getLocale().getLanguage();
+        
+        Resources prueba = new Resources(language, "global_es_ES.xml");
+        prueba.fillHashMap();
+        
+String a = prueba.getGetResources().get("title");
+        
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Project geRdRi</title>
@@ -19,7 +30,7 @@ and open the template in the editor.
         
                     <div class="contenedora">
                         <div class="contenedora_interior">
-                        <h2>Project GERDRI</h2>
+                            <h2><%out.println(prueba.getGetResources().get("title"));%></h2>
                         <input class="" type="text" name="username" placeholder="Username"><br>
                         <input class="contenedora_password" type="password" name="password" placeholder="Password"><br>
                         

@@ -13,7 +13,10 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="mailtest.jsp">mailtest</a>
+        <a href="mailtest.jsp">mailtest</a> </br>
+        <a href="../div.jsp">nuevo index</a> </br>
+               
+        
     </body>
 </html>
 
