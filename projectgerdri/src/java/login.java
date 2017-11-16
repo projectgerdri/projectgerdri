@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 /**
  *
@@ -95,20 +102,35 @@ public class login extends HttpServlet {
             //terminamos la interacción con la BBDD
             rs.close();
             set.close();
+            
         }catch (Exception e){
             System.out.println("No se ha conectado");//here a web page error "DATABASE"
         }
         
         //una vez terminado todo realizamos acción
         
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////    
+
+
+
+
+     ///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////           
+        
+        
+        
         if(loginOk){
+            
             response.sendRedirect(response.encodeRedirectURL("./profile/profile.jsp"));
         }else{
             response.sendRedirect(response.encodeRedirectURL("./index.jsp?login_fail"));
         }
         
     }
-            
+
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 throws ServletException, java.io.IOException {
 processRequest(request, response);

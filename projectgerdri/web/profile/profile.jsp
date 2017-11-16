@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <a href="mailtest.jsp">mailtest</a>
     </body>
 </html>
+
+
+
