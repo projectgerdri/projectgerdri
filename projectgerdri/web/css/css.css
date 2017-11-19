@@ -1,61 +1,85 @@
 /*
 Zona de pagina de login
 */
-.fondo{
+.background{
     background: url("../img/fondo_standard.jpeg") no-repeat center center fixed;
     background-size: 100% 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    /*background-size: cover;*/
 }
-.contenedora{
-    background-color: greenyellow;
+
+.login_container{
+    position: absolute;
     margin: auto;
-    margin-top: 10vw;
-    width : 35%;
-    padding-bottom: 2%;
-    padding-top: 1%;
-    border-radius: 25px;
-    
-    align-content: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: fit-content; 
+    width: -moz-fit-content;
+    height: 40%; 
     text-align: center;
+    background-color: greenyellow;
+    border-radius: 25px;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.login_container_username{
     
 }
-.contenedora_interior{
-    opacity: 1 !important;
+.login_container_username_input{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
 }
-.contenedora_username{
-    
-}
-.contenedora_password{
+
+.login_container_password{
     margin-top: 2%;
 }
-.contenedora_tabla{
-    display:table-cell;
-    vertical-align:middle
+.login_container_password_input{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
 }
-.contenedora_login_facebook{
-    
-}
-.contenedora_login_twitter{
-    
-}
-.contenedora_login_google{
+
+.login_container_singin{
     
 }
 
-/* para efectos
+.login_container_social{
+    width: 100%;
+    height: auto;
+    background: bisque;
+}
 
-.img {
-  width: 200px;
-  height: 200px;
-  border: 10px solid #fff;
-  -webkit-border-radius: 15px;
-   border-radius: 15px;
-  overflow: hidden;
+.login_container_social_facebook{
+    float: left;
 }
- 
-.img:hover {
-  cursor: pointer;
+.login_container_social_facebook_button{
+    
 }
-*/
+
+.login_container_social_twitter{
+    float: left;
+}
+.login_container_social_twitter_button{
+    
+}
+
+.login_container_social_google{
+    float: left;
+}
+.login_container_social_google_button{
+    
+}

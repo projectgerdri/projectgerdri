@@ -9,12 +9,8 @@ and open the template in the editor.
     <!-- Operational zone-->
     <%
         String language = request.getLocale().getLanguage();
-        
-        Resources prueba = new Resources(language, "global_es_ES.xml");
-        prueba.fillHashMap();
-        
-String a = prueba.getGetResources().get("title");
-        
+        Resources text = new Resources(language, "global_es_ES.xml");
+        text.fillHashMap();        
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,45 +20,41 @@ String a = prueba.getGetResources().get("title");
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body class="fondo">
+    <body class="background">
         
-        <form action="login" id="data" method="post">
+    <form action="login" id="data" method="post">
         
-                    <div class="contenedora">
-                        <div class="contenedora_interior">
-                            <h2><%out.println(prueba.getGetResources().get("title"));%></h2>
-                        <input class="" type="text" name="username" placeholder="Username"><br>
-                        <input class="contenedora_password" type="password" name="password" placeholder="Password"><br>
-                        
-                        <table align="center">
-                            <tr>
-                                <td></td>
-                                <td><button type="submit" class="contenedora_login">Sign in</button></td>
-                                <td></td>
-                            </tr>
-                                <td><button type="submit" class="contenedora_login">Faceb</button></td>
-                                <td><button type="submit" class="contenedora_login">Twitter</button></td>
-                                <td><button type="submit" class="contenedora_login">Google</button></td>
-                            <tr>
-                                
-                            </tr>
-                        </table>
-                        </div>
-                    </div>
-                    
-                    </div>
-                    <!--fin div contenedor de campos y botones-->
+    <!--box login container -->
+        <div class="login_container">
+            <div>
+                <h1><%out.println(text.getGetResources().get("title"));%></h1>
+            </div>
+            <div class="login_container_username">
+                <input class="login_container_username_input" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="login_container_password">
+                <input class="login_container_password_input" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="login_container_singin">
+                <button type="submit" class="contenedora_login">Sign in</button>
+            </div>
+            <div class="login_container_social">
+                <div class="login_container_social_facebook">
+                    <button type="submit" class="login_container_social_facebook_button">Facebook</button>
+                </div>
+                <div class="login_container_social_twitter">
+                    <button type="submit" class="login_container_social_twitter_button">Twitter</button>
+                </div>
+                <div class="login_container_social_google">
+                <button type="submit" class="login_container_social_google_button">Google+</button>
+                </div>
+            </div>
+        </div>
+        <!-- End of box login container -->
+        
     </form>
 
             
-        
-            <!--<div>
-                <input class="btnGuardar" type="submit" value="Guardar">
-                <!-- Botón de login de Facebook 
-                <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
-                    
-            </div>-->
-            </div>
-        </form>
+
     </body>
 </html>
