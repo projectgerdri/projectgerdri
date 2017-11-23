@@ -12,12 +12,13 @@ and open the template in the editor.
     -->
     <%
         String language = request.getLocale().getLanguage();
-        Resources text = new Resources(language, "global_es_ES.xml");
-        text.fillHashMap();        
+        String globalPath = getServletContext().getRealPath("/resources/global_es.xml");
+        Resources global = new Resources(language, globalPath);
+        global.fillHashMap();              
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Project geRdRi</title>
+        <title><%out.println(global.getResourcesMap().get("title"));%></title>
         <!--<link rel="icon" href="http://ewaiter.netau.net/fotos/logo/logo%20definitivo%2045x45.png">-->
         <link rel="stylesheet" href="css/css.css">
         <meta charset="UTF-8">
@@ -30,13 +31,13 @@ and open the template in the editor.
     <!--box login container -->
         <div class="login_container">
             <div>
-                <h1><%out.println(text.getGetResources().get("title"));%></h1>
+                <h1><%out.println(global.getResourcesMap().get("title"));%></h1>
             </div>
             <div class="login_container_username">
-                <input class="login_container_username_input" type="text" name="username" placeholder="Username">
+                <input class="login_container_username_input" type="text" name="username" placeholder="<%out.println(global.getResourcesMap().get("username"));%>">
             </div>
             <div class="login_container_password">
-                <input class="login_container_password_input" type="password" name="password" placeholder="Password">
+                <input class="login_container_password_input" type="password" name="password" placeholder="<%out.println(global.getResourcesMap().get("password"));%>">
             </div>
             <div class="login_container_singin">
                 <button type="submit" class="contenedora_login">Sign in</button>
