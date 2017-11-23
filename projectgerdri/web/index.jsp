@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <%@page import="utils.*"%>
 <html>
-    <!-- Operational zone-->
+    <!-- Operational zone!-->
     <%
         String language = request.getLocale().getLanguage();
         Resources text = new Resources(language, "global_es_ES.xml");
@@ -55,6 +55,6 @@ and open the template in the editor.
     </form>
 
             
-
+            <p>aaaa</p>
     </body>
 </html>
