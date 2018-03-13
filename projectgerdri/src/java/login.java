@@ -23,8 +23,9 @@ import javax.servlet.http.HttpSession;
 public class login extends HttpServlet {
 
     Resources param = new Resources("web_parameters.xml");
-    int a = Integer.parseInt(param.getResourcesMap().get("db_param"));
-    DbConnection DBC = new DbConnection(a);
+    //String a = Integer.parseInt(param.getResourcesMap().get("db_param"));
+    String a = param.getResourcesMap().get("db_param");
+    DbConnection DBC = new DbConnection(1);
     
     
     private Connection con;

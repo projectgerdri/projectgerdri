@@ -21,7 +21,7 @@ public class DbConnection {
         this.connectionMode = connectionMode;
         if(connectionMode == 1){
             //desarrollo
-            dbUrl = "jdbc:mysql://81.44.245.179/project_gerdri";
+            dbUrl = "jdbc:mysql://88.1.49.217/project_gerdri";
             userName = "root";
             password = "test";
         } else if(connectionMode == 2){
