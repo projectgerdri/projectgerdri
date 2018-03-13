@@ -17,14 +17,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.mail.*;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 
 @WebServlet(urlPatterns = {"/login"})
 public class login extends HttpServlet {
 
+    Resources param = new Resources("web_parameters.xml");
+    int a = Integer.parseInt(param.getResourcesMap().get("db_param"));
+    DbConnection DBC = new DbConnection(a);
+    
+    
     private Connection con;
     private Statement set;
     private ResultSet rs;
@@ -32,14 +34,19 @@ public class login extends HttpServlet {
     
     //Conexion to database
     public void init(ServletConfig cfg) throws ServletException{
-        String sURL="jdbc:mysql://localhost:3306/project_gerdri";
+        
+        
+        
+//        String sURL="jdbc:mysql://81.44.245.179/project_gerdri";
         super.init(cfg);
-        String userNamebd = "root";
-        String passwordbd = "";
+//        String userNamebd = "root";
+//        String passwordbd = "test";
         //conection
         try {
+            
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(sURL, userNamebd, passwordbd);
+//            con = DriverManager.getConnection(sURL, userNamebd, passwordbd);
+            con = DriverManager.getConnection(DBC.getDbUrl(), DBC.getUserName(), DBC.getPassword());
             System.out.println("Se ha conectado");
             }catch(Exception e){
                 System.out.println("No se ha conectado");//here a web page error "DATABASE"

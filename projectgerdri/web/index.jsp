@@ -27,7 +27,7 @@ and open the template in the editor.
     <!--box login container -->
         <div class="login_container">
             <div>
-                <h1><%out.println(text.getGetResources().get("title"));%></h1>
+                <h1><%out.println(text.getResourcesMap().get("title"));%></h1>
             </div>
             <div class="login_container_username">
                 <input class="login_container_username_input" type="text" name="username" placeholder="Username">
