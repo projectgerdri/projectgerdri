@@ -15,21 +15,21 @@ public class Resources {
     private String xmlFile;
     private HashMap<String, String> resourcesMap;
     
-    public Resources(String w_language, String w_xml){
-        language = w_language;
-        xmlFile = w_xml;
+    public Resources(String language, String xml){
+        this.language = language;
+        this.xmlFile = xml;
         resourcesMap = new HashMap<>();
     }
     
-    public Resources(String w_xml){
-        xmlFile = w_xml;
+    public Resources(String xml){
+        this.xmlFile = xml;
         resourcesMap = new HashMap<>();
     }
     
     public void fillHashMap() throws JDOMException, IOException{        
         SAXBuilder saxBuilder = new SAXBuilder();
         File inputFile = new File(xmlFile); 
-        Document document = saxBuilder.build("");//falla aqui *NO SE LE PASA UNA RUTA EN PLAN C://GERARD/MIRUTA... TIENE QUE SER --> /../WEB/RESOURCES/ES_es_.xml
+        Document document = saxBuilder.build(inputFile);//falla aqui *NO SE LE PASA UNA RUTA EN PLAN C://GERARD/MIRUTA... TIENE QUE SER --> /../WEB/RESOURCES/ES_es_.xml
         Element root = document.getRootElement();
         List allResources = root.getChildren();
 

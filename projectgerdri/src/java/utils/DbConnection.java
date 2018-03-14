@@ -35,7 +35,7 @@ public class DbConnection {
             userName = "";
             password = "";
         }else{
-            dbSelectorError = "No se ha pasado un parametro correcto de selector de BD";
+            dbSelectorError = "No se ha pasado un páramtetro selector de BD correcto";
         }
     }
     
