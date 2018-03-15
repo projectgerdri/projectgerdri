@@ -25,9 +25,10 @@ and open the template in the editor.
     <form action="login" id="data" method="post">
         
     <!--box login container -->
+        <div class="blurry-container"></div>
         <div class="login-container">
             <div>
-                <h1><%out.println(text.getResourcesMap().get("title"));%></h1>
+                <span class="login-title"><%out.println(text.getResourcesMap().get("title"));%></span>
             </div>
             <div class="login-container-username">
                 <input class="login-container-username-input" type="text" name="username" placeholder="<%out.println(text.getResourcesMap().get("username"));%>">

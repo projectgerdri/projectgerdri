@@ -29,7 +29,7 @@ public class Resources {
     public void fillHashMap() throws JDOMException, IOException{        
         SAXBuilder saxBuilder = new SAXBuilder();
         File inputFile = new File(xmlFile); 
-        Document document = saxBuilder.build(inputFile);//falla aqui *NO SE LE PASA UNA RUTA EN PLAN C://GERARD/MIRUTA... TIENE QUE SER --> /../WEB/RESOURCES/ES_es_.xml
+        Document document = saxBuilder.build(inputFile);
         Element root = document.getRootElement();
         List allResources = root.getChildren();
 
