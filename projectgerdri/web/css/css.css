@@ -6,29 +6,33 @@ Zona de pagina de login
     background-size: 100% 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
+    
 }
 
-.login_container{
+.login-container{
     position: absolute;
     margin: auto;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    width: fit-content; 
-    width: -moz-fit-content;
-    height: 40%; 
+    width: 250px;
+    height: 250px;
     text-align: center;
-    background-color: greenyellow;
+    background-color: rgba(173, 255, 47, 0.6);
     border-radius: 25px;
-    padding-left: 4%;
-    padding-right: 4%;
+    padding: 25px;
 }
 
-.login_container_username{
-    
+.login-title {
+    font-size: 30px;
+    font-weight: bold;
 }
-.login_container_username_input{
+
+.login-container-username{
+    margin-top: 20px;
+}
+.login-container-username-input{
     width: 100%;
     padding: 10px 10px;
     margin: 8px 0;
@@ -39,10 +43,10 @@ Zona de pagina de login
     font-size: 13px;
 }
 
-.login_container_password{
+.login-container-password{
     margin-top: 2%;
 }
-.login_container_password_input{
+.login-container-password-input{
     width: 100%;
     padding: 10px 10px;
     margin: 8px 0;
@@ -53,33 +57,16 @@ Zona de pagina de login
     font-size: 13px;
 }
 
-.login_container_singin{
+.login-container-signin{
     
 }
 
-.login_container_social{
+.login-container-social{
     width: 100%;
-    height: auto;
-    background: bisque;
+    margin-top: 20px;
+    height: 30px;
 }
 
-.login_container_social_facebook{
+.login-container-social > input{
     float: left;
-}
-.login_container_social_facebook_button{
-    
-}
-
-.login_container_social_twitter{
-    float: left;
-}
-.login_container_social_twitter_button{
-    
-}
-
-.login_container_social_google{
-    float: left;
-}
-.login_container_social_google_button{
-    
 }

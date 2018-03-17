@@ -25,7 +25,6 @@ and open the template in the editor.
     <form action="login" id="data" method="post">
         
     <!--box login container -->
-        <div class="blurry-container"></div>
         <div class="login-container">
             <div>
                 <span class="login-title"><%out.println(text.getResourcesMap().get("title"));%></span>
