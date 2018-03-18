@@ -21,21 +21,21 @@ public class DbConnection {
         this.connectionMode = connectionMode;
         if(connectionMode == 1){
             //desarrollo
+            dbUrl = "";
+            userName = "";
+            password = "";            
+        } else if(connectionMode == 2){
+            //PreProducción
             dbUrl = "jdbc:mysql://88.1.49.217/project_gerdri";
             userName = "root";
             password = "test";
-        } else if(connectionMode == 2){
-            //PreProducción
-            dbUrl = "";
-            userName = "";
-            password = "";
         }else if (connectionMode == 3){
             //Producción
             dbUrl = "";
             userName = "";
             password = "";
         }else{
-            dbSelectorError = "No se ha pasado un páramtetro selector de BD correcto";
+            dbSelectorError = "No se ha pasado un párametro selector de BD correcto";
         }
     }
     
