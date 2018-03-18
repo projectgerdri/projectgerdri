@@ -22,7 +22,7 @@ and open the template in the editor.
     </head>
     <body class="background">
         
-    <form action="login" id="data" method="post">
+    <form action="Login_Control" id="data" method="post">
         
     <!--box login container -->
         <div class="login-container">

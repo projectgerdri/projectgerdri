@@ -26,20 +26,30 @@ public class Resources {
         resourcesMap = new HashMap<>();
     }
     
-    public void fillHashMap() throws JDOMException, IOException{        
-        SAXBuilder saxBuilder = new SAXBuilder();
-        File inputFile = new File(xmlFile); 
-        Document document = saxBuilder.build(inputFile);
-        Element root = document.getRootElement();
-        List allResources = root.getChildren();
+    public void fillHashMap() /*throws JDOMException, IOException*/{        
+        String pepe = "a";
+        try{
+            SAXBuilder saxBuilder = new SAXBuilder();
+            File inputFile = new File(xmlFile); 
+            Document document = saxBuilder.build(inputFile);
+            Element root = document.getRootElement();
+            List allResources = root.getChildren();
 
-        for (int i = 0; i < allResources.size(); i++) {
-            Element el;
-            el = (Element) allResources.get(i);
-            String key, value;
-            key = el.getAttributeValue("id");
-            value = el.getValue();
-            resourcesMap.put(key, value);
+            for (int i = 0; i < allResources.size(); i++) {
+                Element el;
+                el = (Element) allResources.get(i);
+                String key, value;
+                key = el.getAttributeValue("id");
+                value = el.getValue();
+                resourcesMap.put(key, value);
+            }
+        }catch (JDOMException JDOMe){
+            System.out.println("error "+ JDOMe.getMessage());
+        }catch (IOException IOe){
+            System.out.println("error "+ IOe.getMessage());
+            System.out.println("adsas");
+        }catch (Exception e){
+            System.out.println("error "+ e.getMessage());
         }
     }   
     

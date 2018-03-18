@@ -21,12 +21,13 @@ public class DbConnection {
         this.connectionMode = connectionMode;
         if(connectionMode == 1){
             //desarrollo
-            dbUrl = "";
-            userName = "";
-            password = "";            
+            //dbUrl = "jdbc:mysql://88.1.49.217/project_gerdri";
+            dbUrl = "jdbc:mysql://192.168.1.25/project_gerdri";
+            userName = "root";
+            password = "test";            
         } else if(connectionMode == 2){
             //PreProducción
-            dbUrl = "jdbc:mysql://88.1.49.217/project_gerdri";
+            dbUrl = "jdbc:mysql://88.1.49.217/project_gerdri_prepro";
             userName = "root";
             password = "test";
         }else if (connectionMode == 3){

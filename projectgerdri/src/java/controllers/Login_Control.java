@@ -19,14 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(urlPatterns = {"/login"})
+@WebServlet(urlPatterns = {"/Login_Control"})
 public class Login_Control extends HttpServlet {
-
-    Resources param = new Resources("web_parameters.xml");
-    String a = param.getResourcesMap().get("db_param");
-    DbConnection DBC = new DbConnection(Integer.parseInt(a));
-    
-    
+    Resources param;
+    DbConnection DBC;
     private Connection con;
     private Statement set;
     private ResultSet rs;
@@ -34,23 +30,21 @@ public class Login_Control extends HttpServlet {
     
     //Conexion to database
     public void init(ServletConfig cfg) throws ServletException{
-        
-        
-        
-//        String sURL="jdbc:mysql://81.44.245.179/project_gerdri";
         super.init(cfg);
-//        String userNamebd = "root";
-//        String passwordbd = "test";
-        //conection
+//getServletContext().getRealPath("/") +
+       
         try {
-            
+            Resources param = new Resources(getServletContext().getRealPath("/") +"resources/web_parameters.xml");
+            param.fillHashMap();
+            String a = param.getResourcesMap().get("db_param");
+            System.out.println(a);
+            DbConnection DBC = new DbConnection(Integer.parseInt(a));
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-//            con = DriverManager.getConnection(sURL, userNamebd, passwordbd);
             con = DriverManager.getConnection(DBC.getDbUrl(), DBC.getUserName(), DBC.getPassword());
             System.out.println("Se ha conectado");
-            }catch(Exception e){
-                System.out.println("No se ha conectado");//here a web page error "DATABASE"
-            }
+        }catch(Exception e){
+            System.out.println("err: "+ e.getMessage());
+        }
     }
     
     /**
@@ -63,10 +57,8 @@ public class Login_Control extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    //Java works
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-        //variables that we use
-        //that variables will be extract from database
         String query_user_name;
         String query_user_password;
         String query_user_id;
@@ -95,7 +87,7 @@ public class Login_Control extends HttpServlet {
                 query_user_email = rs.getString("U_email");
                  
                 //information management
-                if(query_user_name.equals(w_user_name)){ //check if user name exist
+                if(query_user_name.equals(w_user_name)){
                     //name is ok, next step, check password
                     //but fist, we must encrypt the password
                     Encrypt encrypt = new Encrypt (query_user_email, query_user_id, w_user_password, query_user_name);
@@ -106,13 +98,11 @@ public class Login_Control extends HttpServlet {
                     }
                 }
             }
-            //end of the use of database
             rs.close();
             set.close();
         }catch (Exception e){
-            System.out.println("No se ha conectado");//here a web page error "DATABASE"
+            System.out.println("No se ha conectado");
         }
-        //now we can send out or in to the user, depending on the boolean variable 
         if(loginOk){
             response.sendRedirect(response.encodeRedirectURL("./profile/profile.jsp"));
         }else{
