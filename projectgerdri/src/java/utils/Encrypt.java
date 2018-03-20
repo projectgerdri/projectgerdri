@@ -9,18 +9,18 @@ import java.security.MessageDigest;
 public class Encrypt {
 
     private String mail;                //Received variable
-    private String id;                  //Received variable
+    private int id;                     //Received variable
     private String password;            //Received varaible
     private String username;            //Received variable
     private String password_encrypt;
     //here set variable from caller
-    public Encrypt (String w_mail, String w_id, String w_password, String w_username){ //
+    public Encrypt (String w_mail, String w_password, int w_id, String w_username){ //
         mail = w_mail;                          //               /////////////////////|||\\\\\\\\\\\\\\\\\\\\\\\
         id = w_id;                              //              //that only works to user password (login page)\\
         password = w_password;                  //              \\\\\\\\\\\\\\\\\\\\\\|||////////////////////////
         username = w_username;                  //                                     //
     }
-     public void Encrypt (){
+     public void encryptPass (){
         //zone of encrypt 
         String password_to_encrypt = mail+password+id+username;                 //join variables
         try{
@@ -52,11 +52,11 @@ public class Encrypt {
         this.mail = mail;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String date) {
+    public void setId(int date) {
         this.id = date;
     }
 

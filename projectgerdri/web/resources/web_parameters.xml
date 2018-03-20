@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
+    <!--<db_param id="db_param">0</db_param>-->
     <db_param id="db_param">1</db_param>
     <!--<db_param id="db_param">2</db_param>-->
     <!--<db_param id="db_param">3</db_param>-->

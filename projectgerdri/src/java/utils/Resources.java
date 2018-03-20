@@ -26,8 +26,7 @@ public class Resources {
         resourcesMap = new HashMap<>();
     }
     
-    public void fillHashMap() /*throws JDOMException, IOException*/{        
-        String pepe = "a";
+    public void fillHashMap() {        
         try{
             SAXBuilder saxBuilder = new SAXBuilder();
             File inputFile = new File(xmlFile); 
@@ -44,14 +43,13 @@ public class Resources {
                 resourcesMap.put(key, value);
             }
         }catch (JDOMException JDOMe){
-            System.out.println("error "+ JDOMe.getMessage());
+            System.out.println("Error del DOM XML: " + JDOMe.getMessage());
         }catch (IOException IOe){
-            System.out.println("error "+ IOe.getMessage());
-            System.out.println("adsas");
+            System.out.println("Error lectura/escritura de fichero: " + IOe.getMessage());
         }catch (Exception e){
-            System.out.println("error "+ e.getMessage());
+            System.out.println("Otro error: " + e.getMessage());
         }
-    }   
+    }
     
     public String getLanguage() {
         return language;
