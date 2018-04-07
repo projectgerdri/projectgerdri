@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <texts>
-    <linea id="title">Project Gerdri</linea>
+    <!--titulos de pagina-->
+    <linea id="title_login">Project Gerdri - Login</linea>
+    <linea id="title_register">Project Gerdri - Registro</linea>
+    <!--titulos de pagina-->
+    <!--login-->
+    <linea id="title_app">Project PTS</linea>
     <linea id="username">Usuario</linea>
     <linea id="password">Contraseña</linea>
     <linea id="login">Entra</linea>
+    <linea id="register">Resgistrate</linea>
+    <!--login-->
+    <!--registro-->
+    <linea id="first_name">Nombre</linea>
+    <linea id="last_name">Apellidos</linea>
+    <linea id="mail">Correo@electrónico.com</linea>
+    <linea id="username">Username</linea>
+    <linea id="password">Contraseña</linea>
+    <linea id="birth_date">Fecha de nacimiento:</linea>
+    <linea id="btn_form_register">Registrate</linea>
+    <!--registro-->
 </texts>

@@ -17,7 +17,7 @@ Zona de pagina de login
     bottom: 0;
     left: 0;
     width: 250px;
-    height: 250px;
+    height: 275px;
     text-align: center;
     background-color: rgba(173, 255, 47, 0.6);
     border-radius: 25px;
@@ -61,6 +61,12 @@ Zona de pagina de login
     
 }
 
+.login-container-register{
+    width: 100%;
+    margin-top: 20px;
+    height: 30px;
+}
+
 .login-container-social{
     width: 100%;
     margin-top: 20px;
@@ -70,3 +76,102 @@ Zona de pagina de login
 .login-container-social > input{
     float: left;
 }
+/*
+Zona de pagina de registro
+*/
+.register-container{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 470px;
+    text-align: center;
+    background-color: rgba(173, 255, 47, 0.6);
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.register-container-fields{
+    margin-top: 6px;
+}
+.register-container-password-input{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+.register-container-fields-calendar{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;  
+}
+
+
+/*CONTRASEÑA */
+
+.password-security-level {
+ width: 100%;
+ background-color: #999;
+ border-radius: 5px; 
+}
+
+.password-security-level td { 
+ width: 42px;
+ height: 5px;
+ background-color: #CCC;
+}
+
+.level-1 {
+ border-radius: 5px 0 0 5px;
+}
+
+.level-5 {
+ border-radius: 0 5px 5px 0;
+}
+
+.terrible-sec {
+ background-color: red !important;
+}
+
+.low-sec {
+ background-color: orange !important;
+}
+
+.medium-sec {
+ background-color: yellow !important;
+}
+
+.high-sec {
+ background-color: chartreuse !important;
+}
+
+.excellent-sec {
+ background-color: green !important;
+}
+
+.password-security-hint {
+ font-family: 'Verdana';
+ font-size: 10px;
+ display: none;
+}
+
+.password-too-short {
+ font-family: 'Verdana';
+ font-size: 10px;
+ color: red;
+}
+
+/*CONTRASEÑA*/

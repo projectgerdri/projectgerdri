@@ -4,12 +4,9 @@ package controllers;
  *
  * @author Adri
  */
+import db_objects.User;
 import utils.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Login;
-import models.User;
 
 
 @WebServlet(urlPatterns = {"/Login_Control"})
 public class Login_Control extends HttpServlet {
     Resources db_param;
-    DbConnection DBC;  
+    DbConnection DBC;
+    
     
     //Conexión a la DB
     public void init(ServletConfig cfg) throws ServletException{
@@ -57,17 +54,34 @@ public class Login_Control extends HttpServlet {
      */    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+        Login login = new Login();
+        boolean successfulLogin = false;
+        User userToCheck = new User();
+        User userToLogin = new User();
+        HttpSession U_session; //Iniciamos el objeto de sesión
+        boolean m_userExist = false;
+        
         //Obtener las credenciales que ha introducido el usuario en el login
         String form_username = (String) request.getParameter("username");
         String form_password = (String) request.getParameter("password");
+        //se crea un objeto usuario a comprobar
+        userToCheck.setUsername(form_username); //en este caso solo este, porque solo miramos el usuario si existe
+        //lo enviamos al modelo
+        m_userExist = login.userExists(userToCheck, DBC);
         
-        HttpSession U_session = request.getSession(true); //Obtener sesión del usuario
-        U_session.setAttribute("user_name", form_username); //Guardar la información de sesión
-        
-        //Comprobar que la información es correcta y redirigir
-        Login loginTry = new Login(form_username, form_password, DBC);
-        boolean isLoginOk = loginTry.loginCheck();
-        if (isLoginOk){
+        if(m_userExist){
+            //si existe pasamos a la siguiente fase, la comprobación
+            //seeteamos el objeto de usuario para el login
+            userToLogin = userToCheck;
+            userToLogin.setPassword(form_password);
+            successfulLogin = login.loginCheck(userToLogin, DBC);
+        }else{
+            String err;
+        }
+
+        if (successfulLogin){
+            U_session = request.getSession(true); //Obtener sesión del usuario
+            U_session.setAttribute("user_name", userToLogin.getUsername()); //Guardar la información de sesión
             response.sendRedirect(response.encodeRedirectURL("./profile/profile.jsp"));
         }else{
             response.sendRedirect(response.encodeRedirectURL("./index.jsp?login_fail"));

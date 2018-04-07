@@ -1,14 +1,13 @@
-package models;
+package db_objects;
 
 import java.util.Date;
-import utils.DbConnection;
 
 public class User {
     
     private int userId;
     private String firstName;
     private String lastName;
-    private Date birthDate;
+    private String birthDate;
     private String email;
     private String username;
     private String nickname;
@@ -38,10 +37,10 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
     public String getEmail() {
