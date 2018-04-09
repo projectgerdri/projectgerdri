@@ -11,6 +11,13 @@ $(document).ready(function()
 		$("#level-3").removeClass("medium-sec");
 		$("#level-4").removeClass("high-sec");
 		$("#level-5").removeClass("excellent-sec");
+                
+                //Decoloreamos las barras de seguridad para recalcular de cero cada vez que se cambie algo
+		$("#password-security-hint > b").removeClass("terrible-sec-text");
+		$("#password-security-hint > b").removeClass("low-sec-text");
+		$("#password-security-hint > b").removeClass("medium-sec-text");
+		$("#password-security-hint > b").removeClass("high-sec-text");
+		$("#password-security-hint > b").removeClass("excellent-sec-text");
 		
 		//Primero comprobamos que la longitud de la contraseña sea o no la mínima para mostrar mensajes
 		if (currentPass.length < 6) {
@@ -71,17 +78,22 @@ $(document).ready(function()
 		console.log("Puntuación postmultiplicador: " + securityPoints);
 		
 		$("#level-1").addClass("terrible-sec");
+                $("#password-security-hint > b").addClass("terrible-sec-text").text("pobre");
 		if (securityPoints > 10) {
 			$("#level-2").addClass("low-sec");
+                        $("#password-security-hint > b").addClass("low-sec-text").text("débil");
 		}
 		if (securityPoints > 20) {
 			$("#level-3").addClass("medium-sec");
+                        $("#password-security-hint > b").addClass("medium-sec-text").text("media");
 		}
 		if (securityPoints > 30) {
 			$("#level-4").addClass("high-sec");
+                        $("#password-security-hint > b").addClass("high-sec-text").text("fuerte");
 		}
 		if (securityPoints > 40) {
 			$("#level-5").addClass("excellent-sec");
+                        $("#password-security-hint > b").addClass("excellent-sec-text").text("excelente");
 		}
 	}
     }

@@ -97,7 +97,7 @@ Zona de pagina de registro
 .register-container-fields{
     margin-top: 6px;
 }
-.register-container-password-input{
+.common-register-fields {
     width: 100%;
     padding: 10px 10px;
     margin: 8px 0;
@@ -108,70 +108,79 @@ Zona de pagina de registro
     font-size: 13px;
 }
 
-.register-container-fields-calendar{
-    width: 100%;
-    padding: 10px 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    box-sizing: border-box;
-    font-size: 13px;  
-}
-
-
-/*CONTRASEÑA */
+/*SEGURIDAD DE CONTRASEÑA*/
 
 .password-security-level {
- width: 100%;
- background-color: #999;
- border-radius: 5px; 
+    width: 100%;
+    background-color: #999;
+    border-radius: 5px; 
 }
 
 .password-security-level td { 
- width: 42px;
- height: 5px;
- background-color: #CCC;
+    width: 42px;
+    height: 5px;
+    background-color: #CCC;
 }
 
-.level-1 {
- border-radius: 5px 0 0 5px;
+.row-beginning {
+    border-radius: 5px 0 0 5px;
 }
 
-.level-5 {
- border-radius: 0 5px 5px 0;
+.row-ending {
+    border-radius: 0 5px 5px 0;
 }
 
 .terrible-sec {
- background-color: red !important;
+    background-color: red !important;
 }
 
 .low-sec {
- background-color: orange !important;
+    background-color: orange !important;
 }
 
 .medium-sec {
- background-color: yellow !important;
+    background-color: yellow !important;
 }
 
 .high-sec {
- background-color: chartreuse !important;
+    background-color: chartreuse !important;
 }
 
 .excellent-sec {
- background-color: green !important;
+    background-color: green !important;
 }
 
-.password-security-hint {
- font-family: 'Verdana';
- font-size: 10px;
- display: none;
+.terrible-sec-text {
+    color: red !important;
 }
 
-.password-too-short {
- font-family: 'Verdana';
- font-size: 10px;
- color: red;
+.low-sec-text {
+    color: orange !important;
 }
 
-/*CONTRASEÑA*/
+.medium-sec-text {
+    color: yellow !important;
+}
+
+.high-sec-text {
+    color: chartreuse !important;
+}
+
+.excellent-sec-text {
+    color: green !important;
+}
+
+.password-security-text {
+    font-family: 'Verdana';
+    font-size: 10px;
+    text-align: left;
+    color: grey;
+    margin: 5px 0 10px;
+    width: 100%;
+}
+
+#password-security-hint > b {
+    text-shadow: 1px 1px 1px grey;
+}
+
+/*SEGURIDAD DE CONTRASEÑA*/
