@@ -9,7 +9,7 @@
     <linea id="username">Usuario</linea>
     <linea id="password">Contraseña</linea>
     <linea id="login">Entra</linea>
-    <linea id="register">Resgistrate</linea>
+    <linea id="register">Regístrate</linea>
     <!--login-->
     <!--registro-->
     <linea id="first_name">Nombre</linea>
@@ -18,6 +18,15 @@
     <linea id="username">Username</linea>
     <linea id="password">Contraseña</linea>
     <linea id="birth_date">Fecha de nacimiento:</linea>
-    <linea id="btn_form_register">Registrate</linea>
+    <linea id="btn_form_register">Regístrate</linea>
     <!--registro-->
+    <!--seguridad de contraseña-->
+    <linea id="pass_sec_strength">Fortaleza de la contraseña: </linea>
+    <linea id="pass_sec_terrible">pobre</linea>
+    <linea id="pass_sec_weak">débil</linea>
+    <linea id="pass_sec_average">media</linea>
+    <linea id="pass_sec_strong">fuerte</linea>
+    <linea id="pass_sec_excellent">excelente</linea>
+    <linea id="pass_sec_too_short">La contraseña es demasiado corta</linea>
+    <!--seguridad de contraseña-->
 </texts>

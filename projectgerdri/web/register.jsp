@@ -40,21 +40,7 @@
             </div>
             <div class="register-container-fields">
                 <input id="register-container-password-input" class="common-register-fields" type="password" name="password" placeholder="<%out.println(text.getResourcesMap().get("password"));%>">
-                <div class="password-security">
-                    <table class="password-security-level">
-                        <tr>
-                            <td id="level-1" class="row-beginning"></td>
-                            <td id="level-2"></td>
-                            <td id="level-3"></td>
-                            <td id="level-4"></td>
-                            <td id="level-5" class="row-ending"></td>
-                        </tr>
-                    </table>
-                    <div class="password-security-text">
-                        <span id="password-security-hint">Fortaleza de la contraseña: <b></b></span>
-                        <span id="password-too-short">La contraseña es demasiado corta</span>
-                    </div>                    
-                </div>
+                <jsp:include page="modules/password_security.jsp" />
             </div>
             <div class="register-container-fields">
                 <a><%out.println(text.getResourcesMap().get("birth_date"));%></a>
