@@ -5,11 +5,16 @@ import java.sql.SQLException;
 import utils.DbConnection;
 import utils.Encrypt;
 
+/** Modelo encargado de atender a las peticiones relativas al Login del usuario */
 public class Login {
     DbConnection DBC;
     Encrypt encryption;
    
-    
+    /** Método que verifica si el usuario introducido en el campo username del formulario de entrada existe o no en el sistema
+     @param userToCheck Modelo usuario que se rellena con la información que encuentra la query usando el username del formulario de entrada
+     @param DBC Instancia de la clase de conexión con la base de datos mediante la cual se podrá hacer la query
+     @return Devuelve un <b>boolean</b> que responde a la pregunta de si el usuario existe o no tras hacer las pertinentes comprobaciones
+     @see controllers.Login_Control */
     public boolean userExists(User userToCheck, DbConnection DBC) {
         boolean doesUserExist = false;
         
@@ -28,14 +33,18 @@ public class Login {
             }             
         } catch (SQLException e) {
             System.out.println("Problemas al cargar los resultados de DB");
-        }
-        
-        DBC.closeConnection();
+        } finally {
+            DBC.closeConnection();
+        }        
         
         return doesUserExist;
     }
     
-    
+    /** Método que verifica si la contraseña en el campo password del formulario de entrada se corresponde con el usuario introducido para permitir el Login
+     @param userToLogin Modelo usuario que se rellena con la información que encuentra la query usando el username del formulario de entrada
+     @param DBC Instancia de la clase de conexión con la base de datos mediante la cual se podrá hacer la query
+     @return Devuelve un <b>boolean</b> que responde a la pregunta de si el usuario y la contraseña introducidos son correctos
+     @see controllers.Login_Control */
     public boolean loginCheck(User userToLogin, DbConnection DBC) {
         boolean authentication = false;
         //encriptamos el password
