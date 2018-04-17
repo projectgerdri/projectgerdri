@@ -17,8 +17,9 @@ public class CustomDate {
     }
     
     //Del formato ISO del Javascript (YYYY-MM-DDThh:mm:ss.dddZ) al por defecto de LocalDateTime (YYYY-MM-DDThh:mm:ss.ddd)
-    public static LocalDateTime fromJsToJavaFormat(String jsDate) {
+    public static LocalDateTime fromJsToJavaFormat(String jsDate, int diffTimeZone) {
         LocalDateTime formattedDate = LocalDateTime.parse(jsDate.replace("Z", ""));
+        formattedDate = formattedDate.plusHours(diffTimeZone);
         return formattedDate;
     }
 }

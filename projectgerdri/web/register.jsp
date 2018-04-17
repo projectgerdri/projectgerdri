@@ -11,7 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%out.println(text.getResourcesMap().get("title_register"));%></title>
         <!--<link rel="icon" href="http://ewaiter.netau.net/fotos/logo/logo%20definitivo%2045x45.png">-->
-        <link rel="stylesheet" href="css/css.css">
+        <!-- Línea de abajo comentada porque se está importando el CSS global con el HTML parcial de más abajo. Recordar descomentar esto cuando
+        tengamos los CSS bien montados y separados y hacer que el HTML parcial importe sólo el CSS de su utilidad -->
+        <!--<link rel="stylesheet" href="css/css.css">-->
+        <jsp:include page="modules/password_security_head.jsp" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
