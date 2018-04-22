@@ -2,7 +2,7 @@ $(document).ready(function()
     {   
         //Lanzamos el evento de calcular la seguridad de contraseña al abrir la página y cada vez que se escriba algo en el input padre
 	$("#register-container-password-input").keyup(checkPassLength);
-	
+	//MASTER CIFUENTES
 	function checkPassLength() {
             //Capturamos el valor del input padre (desde fuera de esta función no reconoce los cambios)
             var currentPass = $("#register-container-password-input").val();
