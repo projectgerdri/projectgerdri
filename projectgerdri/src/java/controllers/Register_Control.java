@@ -18,14 +18,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Register;
 
-
+/**Controladora que atiende las peticiones provenientes del JSP de Register */
 @WebServlet(urlPatterns = {"/Register_Control"})
 public class Register_Control extends HttpServlet {
     Resources db_param;
     DbConnection DBC;  
     
-    
-    //Conexión a la DB
+    /**
+     * Método que inicia el servlet ejecutando "init()" de la clase padre HttpServlet, los recursos XML con Resources
+     * y la base de datos con DbConnection
+     * @param cfg ServletConfig facilitado para preparar el servlet
+     * @throws ServletException 
+     */
     @Override
     public void init(ServletConfig cfg) throws ServletException{
         super.init(cfg);
@@ -45,15 +49,16 @@ public class Register_Control extends HttpServlet {
     }
     
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * 
+     * <b>PTS:</b> Gestiona el Register desde el momento en que se clica en el botón. Se comprueba si el usuario
+     * existe en Db y se envía a la página de OK o de error según la información obtenida en Db
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */    
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException{
         boolean succesfullResgister = false;
         User userToCheck = new User();

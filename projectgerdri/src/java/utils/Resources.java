@@ -6,26 +6,35 @@ import java.util.List;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 
-/**
- *
- * @author adria
- */
+/**Clase de utilidad encargada de acceder a los archivos de recursos XML de los que se nutre la aplicación*/
 public class Resources {
     private String language;
     private String xmlFile;
     private HashMap<String, String> resourcesMap;
     
+    /**
+     * Constructor que crea los recursos definiendo por parámetros el idioma y la ubicación del archivo XML. Adecuado para recursos de texto multiidioma
+     * @param language Idioma en que queremos devolver los recursos de texto
+     * @param xml Ruta que apunta al XML de los recursos de texto de los que queremos sacar la información
+     */
     public Resources(String language, String xml){
         this.language = language;
         this.xmlFile = xml;
         resourcesMap = new HashMap<>();
     }
     
+    /**
+     * Constructor que crea los recursos definiendo por parámetro la ubicación del archivo XML. Adecuado para ficheros de configuración u otros
+     * @param xml Ruta que apunta al XML de los recursos de texto de los que queremos sacar la información
+     */
     public Resources(String xml){
         this.xmlFile = xml;
         resourcesMap = new HashMap<>();
     }
     
+    /**
+     * Método que rellena el mapa de recursos con clave/valor recorriendo todo el fichero XML definido anteriormente
+     */
     public void fillHashMap() {        
         try{
             SAXBuilder saxBuilder = new SAXBuilder();

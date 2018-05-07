@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.sql.Connection;
@@ -10,10 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-/**
- *
- * @author adria
- */
+/**Clase de utilidad encargada de la conexión con la DB. Se gestiona a qué entorno nos conectamos y la apertura y cierre de conexiones para las queries */
 public class DbConnection {
     
     private int connectionMode; //0 = local, 1 = desarrollo, 2 = preproducción, 3 = producción
@@ -25,6 +17,10 @@ public class DbConnection {
     public Statement set;
     public ResultSet rs;
     
+    /**
+     * Constructor que, dependiendo del entorno al que nos queramos conectar, establece una URL de DB y credenciales adecuadas
+     * @param connectionMode Entero con hasta 4 valores posibles que define a qué entorno nos vamos a conectar
+     */
     public DbConnection(int connectionMode){
         this.connectionMode = connectionMode;
         
@@ -74,6 +70,10 @@ public class DbConnection {
         return dbSelectorError;
     }
     
+    /**
+     * Método que prueba la conexión de base de datos con el entorno previamente definido antes de empezar cualquier query
+     * @return Devuelve un <b>boolean</b> que responde a la pregunta de si se ha podido establecer correctamente la conexión con Db
+     */
     public boolean testConnection() {
         boolean isConnected = false;
         try {
@@ -87,15 +87,22 @@ public class DbConnection {
         return isConnected;
     }
     
+    /**
+     * Método que abre la conexión con Db y ejecuta la query que le pasemos por parámetro. Lanza una excepción si no se ha podido completar la query
+     * @param query String con todo el contenido de la query para que sea ejecutada
+     */
     public void openConnection(String query) {
         try {
             set = con.createStatement();
             rs = set.executeQuery(query);
         } catch (Exception e) {
             System.out.println("Algo ha ido mal al intentar hacer la query");
-        }   
+        }
     }
     
+    /**
+     * Método que simplemente cierra la conexión con Db
+     */
     public void closeConnection() {
         try {
             set.close();

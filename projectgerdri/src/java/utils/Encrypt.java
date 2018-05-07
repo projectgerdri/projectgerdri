@@ -2,25 +2,34 @@ package utils;
 
 import java.security.MessageDigest;
 
-/**
- *
- * @author Adri
- */
+/**Clase de utilidad encargada de encriptar contraseñas u otras cadenas de texto. Se usa cifrado SHA-256 por defecto*/
 public class Encrypt {
-
-    private String mail;                //Received variable
-    private String password;            //Received varaible
-    private String username;            //Received variable
+    
+    //TODO: Estos campos no deberían ser atributos ya que para otro cifrado se pueden usar otros. Mejor pasarlos sólo como
+    //parámetros en el método de encriptado
+    private String mail;
+    private String password;
+    private String username;
     private String password_encrypt;
-    //here set variable from caller
-    public Encrypt (String w_mail, String w_password, String w_username){ //
-        mail = w_mail;                          //               /////////////////////|||\\\\\\\\\\\\\\\\\\\\\\\                             //              //that only works to user password (login page)\\
-        password = w_password;                  //              \\\\\\\\\\\\\\\\\\\\\\|||////////////////////////
-        username = w_username;                  //                                     //
+
+    /**
+     * Constructor que define los 3 parámetros sobre los que se realizará el encriptado
+     * @param w_mail Email del usuario
+     * @param w_password Contraseña del usuario
+     * @param w_username Username del usuario
+     */
+    public Encrypt (String w_mail, String w_password, String w_username){
+        mail = w_mail;  //that only works to user password (login page)\\
+        password = w_password;
+        username = w_username;
     }
-     public void encryptPass (){
+    
+    /**
+     * Método encargado de generar la cadena cifrada a partir de los parámetros de usuario establecidos anteriormente
+     */
+    public void encryptPass (){
         //zone of encrypt 
-        String password_to_encrypt = mail+password+username;                 //join variables
+        String password_to_encrypt = mail+password+username;  //join variables
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password_to_encrypt.getBytes("UTF-8"));

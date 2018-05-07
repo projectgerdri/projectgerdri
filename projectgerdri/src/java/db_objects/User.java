@@ -2,6 +2,12 @@ package db_objects;
 
 import java.util.Date;
 
+/**
+ * Modelo de DB perteneciente a la tabla Users. Únicamente cuenta con getters y setters al tratarse de un módulo temporal de transporte de datos
+ * (las operaciones se realizan en los modelos ajenos a la DB como Login y Register)
+ * @see models.Login
+ * @see models.Register
+ */
 public class User {
     
     private int userId;

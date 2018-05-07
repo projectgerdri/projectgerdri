@@ -5,18 +5,28 @@ import java.sql.SQLException;
 import utils.DbConnection;
 import utils.Encrypt;
 
+/** Modelo encargado de atender a las peticiones relativas al Registro del usuario
+* @see utils.Encrypt
+* @see utils.DbConnection
+* @see controllers.Register_Control
+*/
 public class Register {
     DbConnection DBC;
     Encrypt encryption;
 
-    
+    /**
+     * Función que verfica si el nombre de usuario o correo electrónico introducido en el formulario de registro existe ya en nuestra DB
+     * @param userToCheck Modelo usuario que se rellena con la información que encuentra la query usando el username del formulario de registro
+     * @param DBC Instancia de la clase de conexión con la base de datos mediante la cual se podrá hacer la query
+     * @return Devuelve un <b>int</b> con cuatro códigos númericos posibles para determinar qué coincide de ese usuario en la DB
+     */
     public int dataNewUserCheck (User userToCheck, DbConnection DBC){//comprueba que los datos sean correctos
         int dataCheck = 0;  //0=ok 1=username 2=mail 3=las dos 4=fallo desconocido "BBDD"
         boolean userExist = false;
         boolean mailExist = false;        
         boolean bdFail = false;
 
-        String query = "select U_user_name from project_gerdri.Users where U_user_name in ('"+userToCheck.getUsername()+"')";
+        String query = "select U_user_name from project_gerdri.Users where U_user_name = '"+userToCheck.getUsername()+"'";
         DBC.openConnection(query);
         try 
         {
@@ -68,7 +78,12 @@ public class Register {
         return dataCheck;//0=ok 1=username 2=mail 3=las dos 4=fallo desconocido "BBDD"
     }
     
-    
+    /**
+     * Función que añade un nuevo usuario a la DB con la información del formulario de registro rellenado
+     * @param userToCInsert Modelo usuario que se rellena con la información que encuentra la query usando el username del formulario de registro
+     * @param DBC Instancia de la clase de conexión con la base de datos mediante la cual se podrá hacer la query
+     * @return Devuelve un <b>boolean</b> respondiendo a la pregunta de si se ha podido insertar el nuevo usuario en DB o no
+     */
     public boolean dataNewUserInsert(User userToCInsert, DbConnection DBC) throws SQLException {//Retorna true or false depndiendo si se ha insertado en la BD
         boolean dataRegistered = false;//por defecto entendemos que no se ha insertado
         encryption = new Encrypt(userToCInsert.getEmail(), userToCInsert.getPassword(), userToCInsert.getUsername());//encriptado

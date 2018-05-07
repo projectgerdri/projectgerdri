@@ -5,7 +5,11 @@ import java.sql.SQLException;
 import utils.DbConnection;
 import utils.Encrypt;
 
-/** Modelo encargado de atender a las peticiones relativas al Login del usuario */
+/** Modelo encargado de atender a las peticiones relativas al Login del usuario
+* @see utils.Encrypt
+* @see utils.DbConnection
+* @see controllers.Login_Control
+*/
 public class Login {
     DbConnection DBC;
     Encrypt encryption;
@@ -58,11 +62,11 @@ public class Login {
                     + "AND U_deleted IS NULL";
         DBC.openConnection(loginQuery);
         
-        try {//si entra en la cosnulta quiere decir que es igual la contraseña y que la escritobien, guardaremos los datos en el objeto usuario y daremos el ok
+        try {//si entra en la consulta quiere decir que es igual la contraseña y que la ha escrito bien, guardaremos los datos en el objeto usuario y daremos el OK
             while (DBC.rs.next()) {  
                 userToLogin.setUserId((DBC.rs.getInt("U_id")));
                 userToLogin.setUsername((DBC.rs.getString("U_user_name")));
-                userToLogin.setPassword("");//la dejamos vacia por seguridad 
+                userToLogin.setPassword("");//La dejamos vacía por seguridad 
                 authentication = true;
             }             
         } catch (SQLException e) {
