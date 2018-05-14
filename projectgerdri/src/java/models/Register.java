@@ -107,6 +107,7 @@ public class Register {
         try{
             DBC.set.executeUpdate(registerQuery);
             dataRegistered = true;
+            //Código para enviar el mail de validación de nueva cuenta
         } catch (Exception e){
             System.out.println("Problemas en el insert: " +e.getMessage());
         }
