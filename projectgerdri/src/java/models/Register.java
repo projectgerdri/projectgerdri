@@ -3,6 +3,7 @@ package models;
 import db_objects.User;
 import java.sql.SQLException;
 import utils.DbConnection;
+import utils.Email;
 import utils.Encrypt;
 
 /** Modelo encargado de atender a las peticiones relativas al Registro del usuario
@@ -106,12 +107,14 @@ public class Register {
         DBC.openConnection(registerQuery);
         try{
             DBC.set.executeUpdate(registerQuery);
-            dataRegistered = true;
-            //Código para enviar el mail de validación de nueva cuenta
+            dataRegistered = true;            
         } catch (Exception e){
             System.out.println("Problemas en el insert: " +e.getMessage());
         }
         DBC.closeConnection();
+        
+        //Código para enviar el mail de validación de nueva cuenta (de momento enviamos por defecto en español, luego capturar idioma de navegador de usuario)
+        Email validateAccountMail = new Email(userToCInsert, Email.TypeOfMessage.VALIDATE_NEW_ACCOUNT, "es-ES");
         
         return dataRegistered;
     }
