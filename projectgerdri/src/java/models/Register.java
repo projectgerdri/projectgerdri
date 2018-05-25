@@ -27,13 +27,13 @@ public class Register {
         boolean mailExist = false;        
         boolean bdFail = false;
 
-        String query = "select U_user_name from project_gerdri.Users where U_user_name = '"+userToCheck.getUsername()+"'";
+        String query = "select U_username from project_gerdri.Users where U_username = '"+userToCheck.getUsername()+"'";
         DBC.openConnection(query);
         try 
         {
             while (DBC.rs.next()) 
             {
-                String temp_username = (DBC.rs.getString("U_user_name"));      
+                String temp_username = (DBC.rs.getString("U_username"));      
                 if(temp_username.equals(userToCheck.getUsername())){
                     userExist = true;
                 }
@@ -92,16 +92,14 @@ public class Register {
         userToCInsert.setPassword(encryption.getPassword_encrypt());
   
         String registerQuery = 
-                "INSERT INTO Users (U_first_name, U_last_name, U_birth_date, U_email, U_user_name, U_nickname, U_password, U_register_date, U_confirmed )\n" +
-                "VALUES (\""+userToCInsert.getFirstName()+"\", "
-                + "\""+userToCInsert.getLastName()+"\", "
-                + "\""+userToCInsert.getBirthDate()+"\", "//cambiar por la fecha
-                + "\""+userToCInsert.getEmail()+"\", "
-                + "\""+userToCInsert.getUsername()+"\", "
-                + "\""+userToCInsert.getUsername()+"\", " //por ahora es el mismo, más adelante se cambia
-                + "\""+userToCInsert.getPassword()+"\","
-                + " sysdate(),"
-                + "\""+1+"\")";//por ahora se pone 1 para dejarlo confirmado ---> con el mail se tiene que poner a 0 para que se confirme
+                "INSERT INTO Users (U_first_name, U_last_name, U_birth_date, U_email, U_username, U_nickname, U_password)\n" +
+                "VALUES ('"+userToCInsert.getFirstName()+"', "
+                + "'"+userToCInsert.getLastName()+"', "
+                + "'"+userToCInsert.getBirthDate()+"', "//cambiar por la fecha
+                + "'"+userToCInsert.getEmail()+"', "
+                + "'"+userToCInsert.getUsername()+"', "
+                + "'"+userToCInsert.getUsername()+"', " //por ahora es el mismo, más adelante se cambia
+                + "'"+userToCInsert.getPassword()+"')";
                 
         
         DBC.openConnection(registerQuery);
@@ -115,6 +113,7 @@ public class Register {
         
         //Código para enviar el mail de validación de nueva cuenta (de momento enviamos por defecto en español, luego capturar idioma de navegador de usuario)
         Email validateAccountMail = new Email(userToCInsert, Email.TypeOfMessage.VALIDATE_NEW_ACCOUNT, "es-ES");
+        validateAccountMail.sendEmail();
         
         return dataRegistered;
     }

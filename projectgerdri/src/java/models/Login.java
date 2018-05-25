@@ -22,9 +22,9 @@ public class Login {
     public boolean userExists(User userToCheck, DbConnection DBC) {
         boolean doesUserExist = false;
         
-        String loginQuery = "SELECT U_email, U_id, U_user_name "
+        String loginQuery = "SELECT U_email, U_id, U_username "
                 + "FROM project_gerdri.Users "
-                + "WHERE U_user_name = '" + userToCheck.getUsername() + "' "
+                + "WHERE U_username = '" + userToCheck.getUsername() + "' "
                     + "AND U_deleted IS NULL";
         DBC.openConnection(loginQuery);
         
@@ -32,7 +32,7 @@ public class Login {
             while (DBC.rs.next()) {
                 userToCheck.setEmail(DBC.rs.getString("U_email"));                        
                 userToCheck.setUserId(DBC.rs.getInt("U_id"));
-                userToCheck.setUsername(DBC.rs.getString("U_user_name"));
+                userToCheck.setUsername(DBC.rs.getString("U_username"));
                 doesUserExist = true;
             }             
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class Login {
         encryption.encryptPass();
         userToLogin.setPassword(encryption.getPassword_encrypt());
 
-            String loginQuery = "SELECT U_password, U_id, U_user_name"
+            String loginQuery = "SELECT U_password, U_id, U_username"
                 + " FROM project_gerdri.Users "
                 + "WHERE U_password = '" + userToLogin.getPassword()+ "' "
                     + "AND U_deleted IS NULL";
@@ -65,7 +65,7 @@ public class Login {
         try {//si entra en la consulta quiere decir que es igual la contraseña y que la ha escrito bien, guardaremos los datos en el objeto usuario y daremos el OK
             while (DBC.rs.next()) {  
                 userToLogin.setUserId((DBC.rs.getInt("U_id")));
-                userToLogin.setUsername((DBC.rs.getString("U_user_name")));
+                userToLogin.setUsername((DBC.rs.getString("U_username")));
                 userToLogin.setPassword("");//La dejamos vacía por seguridad 
                 authentication = true;
             }             
