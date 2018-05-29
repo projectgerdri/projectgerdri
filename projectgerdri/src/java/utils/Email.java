@@ -1,10 +1,16 @@
 package utils;
 
 import db_objects.User;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Calendar;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.InternetAddress;
+import org.apache.commons.io.IOUtils;
 
 /**
  * Clase de utilidad que permite el envío de correos electrónicos a los usuarios de PTS. Actualmente puede:
@@ -28,7 +34,7 @@ public class Email {
     private String fromAddress;
     private String fromPass;
     private String smtpServer;
-    private TypeOfMessage template;
+    private String template;
     private String language;
     private String mailSubject;
     private String mailBody;   
@@ -39,7 +45,7 @@ public class Email {
      * @param template Tipo de mensaje que se quiere enviar, necesario para rellenar el cuerpo y título del correo electrónico
      * @param language Idioma usado por el jugador en su navegador y con el que se elaborará el mail
      */
-    public Email(User destinationUser, TypeOfMessage template, String language) {
+    public Email(User destinationUser, String template, String language) {
         this.destinationUser = destinationUser;
         this.fromAddress = DEFAULT_FROM_ADDRESS;
         this.fromPass = DEFAULT_FROM_PASSWORD;        
@@ -75,7 +81,7 @@ public class Email {
             message.setFrom(new InternetAddress(fromAddress));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinationUser.getEmail()));
             message.setSubject(mailSubject);
-            message.setText(mailBody);
+            message.setContent(mailBody, "text/html");
             Transport.send(message);
         } 
         catch (MessagingException msge) {
@@ -89,8 +95,23 @@ public class Email {
      * Método que rellena el título y cuerpo del mensaje según el idioma, plantilla escogida y usuario final
      */
     private void fillWithDynamicContent() {
-        this.mailSubject = "¡Bienvenido!";
-        this.mailBody = "Bienvenido a PTS " + destinationUser.getFirstName() + " " + destinationUser.getLastName();        
+        this.mailSubject = "¡Bienvenido!";        
+        StringWriter htmlContent = new StringWriter();
+        
+        //Gracias a la librería Apache Commons IO, parseamos el contenido de la plantilla HTML a un String que se puede enviar por JavaMail
+        try {            
+            IOUtils.copy(new FileInputStream(new File(template.replace("_lang", "_" + language))), htmlContent, "utf-8");            
+        } catch (IOException ioe) {
+            System.err.println("No se ha podido convertir la plantilla HTML a String");
+        }
+        
+        //De momento reemplazamos el contenido dinámico a pelo, pero próximamente hacerlo con un fichero properties y un bucle apropiado
+        String parsedContent = htmlContent.toString();
+        parsedContent = parsedContent.replace("{NAME}", destinationUser.getFirstName())
+                .replace("{BRAND-NAME}", "Project Team Simulator, PTS").replace("{LINK}", "http://www.marca.com")
+                .replace("{SHORT-BRAND-NAME}", "PTS").replace("{YEAR}", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)));
+        
+        this.mailBody = parsedContent;        
     }
     
     /*GETTERS AND SETTERS*/
@@ -126,11 +147,11 @@ public class Email {
         this.smtpServer = smtpServer;
     }
 
-    public TypeOfMessage getTemplate() {
+    public String getTemplate() {
         return template;
     }
 
-    public void setTemplate(TypeOfMessage template) {
+    public void setTemplate(String template) {
         this.template = template;
     }
 

@@ -85,7 +85,7 @@ public class Register {
      * @param DBC Instancia de la clase de conexión con la base de datos mediante la cual se podrá hacer la query
      * @return Devuelve un <b>boolean</b> respondiendo a la pregunta de si se ha podido insertar el nuevo usuario en DB o no
      */
-    public boolean dataNewUserInsert(User userToCInsert, DbConnection DBC) throws SQLException {//Retorna true or false depndiendo si se ha insertado en la BD
+    public boolean dataNewUserInsert(User userToCInsert, DbConnection DBC, String context) throws SQLException {//Retorna true or false depndiendo si se ha insertado en la BD
         boolean dataRegistered = false;//por defecto entendemos que no se ha insertado
         encryption = new Encrypt(userToCInsert.getEmail(), userToCInsert.getPassword(), userToCInsert.getUsername());//encriptado
         encryption.encryptPass();
@@ -112,7 +112,7 @@ public class Register {
         DBC.closeConnection();
         
         //Código para enviar el mail de validación de nueva cuenta (de momento enviamos por defecto en español, luego capturar idioma de navegador de usuario)
-        Email validateAccountMail = new Email(userToCInsert, Email.TypeOfMessage.VALIDATE_NEW_ACCOUNT, "es-ES");
+        Email validateAccountMail = new Email(userToCInsert, context + "mail-templates/validate-user_lang.html", "es");
         validateAccountMail.sendEmail();
         
         return dataRegistered;
