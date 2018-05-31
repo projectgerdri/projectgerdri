@@ -15,6 +15,7 @@
         tengamos los CSS bien montados y separados y hacer que el HTML parcial importe sólo el CSS de su utilidad -->
         <!--<link rel="stylesheet" href="css/css.css">-->
         <jsp:include page="modules/password_security_head.jsp" />
+        <link rel="stylesheet" href="css/register.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,7 +28,7 @@
     <!--box login container -->
         <div class="register-container">
             <div>
-                <span class="login-title"><%out.println(text.getResourcesMap().get("title_app"));%></span>
+                <span class="register-title"><%out.println(text.getResourcesMap().get("title_app"));%></span>
             </div>
             <div class="register-container-fields">
                 <input class="common-register-fields" type="text" name="first_name" placeholder="<%out.println(text.getResourcesMap().get("first_name"));%>">
@@ -52,7 +53,7 @@
             <div class="register-container-fields">
                 <button type="submit" class=""><%out.println(text.getResourcesMap().get("btn_form_register"));%></button>
             </div>
-            <div class="login-container-social">
+            <div class="register-container-social">
                 <button type="submit" id="login-facebook" class="login-facebook">Facebook</button>
                 <button type="submit" id="login-twitter" class="login-twitter">Twitter</button>
                 <button type="submit" id="login-google" class="login-google">Google+</button>

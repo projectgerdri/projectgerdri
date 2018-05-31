@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%out.println(text.getResourcesMap().get("title_login"));%></title>
         <!--<link rel="icon" href="http://ewaiter.netau.net/fotos/logo/logo%20definitivo%2045x45.png">-->
-        <link rel="stylesheet" href="css/css.css">
+        <link rel="stylesheet" href="css/index.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>

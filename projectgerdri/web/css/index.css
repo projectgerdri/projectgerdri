@@ -1,0 +1,78 @@
+/*
+Zona de pagina de login
+*/
+.background{
+    background: url("../img/fondo_standard.jpeg") no-repeat center center fixed;
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    
+}
+
+.login-container{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 275px;
+    text-align: center;
+    background-color: rgba(173, 255, 47, 0.6);
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.login-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.login-container-username{
+    margin-top: 20px;
+}
+.login-container-username-input{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+.login-container-password{
+    margin-top: 2%;
+}
+.login-container-password-input{
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+.login-container-signin{
+    
+}
+
+.login-container-register{
+    width: 100%;
+    margin-top: 20px;
+    height: 30px;
+}
+
+.login-container-social{
+    width: 100%;
+    margin-top: 20px;
+    height: 30px;
+}
+
+.login-container-social > input{
+    float: left;
+}

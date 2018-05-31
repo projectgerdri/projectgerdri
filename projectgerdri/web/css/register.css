@@ -1,0 +1,48 @@
+/*
+Zona de pagina de registro
+*/
+.background{
+    background: url("../img/fondo_standard.jpeg") no-repeat;
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    
+}
+
+.register-container{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    height: 470px;
+    text-align: center;
+    background-color: rgba(173, 255, 47, 0.6);
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.register-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+.register-container-fields{
+    margin-top: 6px;
+}
+.common-register-fields {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+.register-container-social{
+    width: 100%;
+    margin-top: 20px;
+    height: 30px;
+}
