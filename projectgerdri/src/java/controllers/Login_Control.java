@@ -3,6 +3,7 @@ package controllers;
 import db_objects.User;
 import utils.*;
 import java.io.IOException;
+import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,6 @@ import models.Login;
 /**Controladora que atiende las peticiones provenientes del JSP de Login */
 @WebServlet(urlPatterns = {"/Login_Control"})
 public class Login_Control extends HttpServlet {
-    Resources db_param;
     DbConnection DBC;
     
     
@@ -28,12 +28,9 @@ public class Login_Control extends HttpServlet {
     public void init(ServletConfig cfg) throws ServletException{
         super.init(cfg);
         
-        int db_selector = 1; //por defecto desarrollo (tiene que estar inicializada)
-        
         //Comprobar a qué DB estamos apuntando
-        db_param = new Resources(getServletContext().getRealPath("/") + "resources/" + "web_parameters.xml");
-        db_param.fillHashMap();
-        db_selector = Integer.parseInt(db_param.getResourcesMap().get("db_param"));
+        Properties db_param = FileParser.getDataFromProperties(getServletContext().getRealPath("/") + "properties/" + "db_params.properties");
+        int db_selector = Integer.parseInt(db_param.getProperty("db_param"));
         
         //Iniciar y testear la conexión con la DB
         DBC = new DbConnection(db_selector);

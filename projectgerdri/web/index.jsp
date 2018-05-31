@@ -1,14 +1,14 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="utils.*"%>
 <html>
     <!-- Operational zone-->
     <%
         String language = request.getLocale().getLanguage();
-        Resources text = new Resources(language, getServletContext().getRealPath("/") + "resources/global_es.xml");
-        text.fillHashMap();        
+        HashMap<String, String> text = FileParser.getResourcesFromXml(getServletContext().getRealPath("/") + "resources/global_lang.xml", language);
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><%out.println(text.getResourcesMap().get("title_login"));%></title>
+        <title><%out.println(text.get("title_login"));%></title>
         <!--<link rel="icon" href="http://ewaiter.netau.net/fotos/logo/logo%20definitivo%2045x45.png">-->
         <link rel="stylesheet" href="css/css.css">
         <meta charset="UTF-8">
@@ -21,19 +21,19 @@
     <!--box login container -->
         <div class="login-container">
             <div>
-                <span class="login-title"><%out.println(text.getResourcesMap().get("title_app"));%></span>
+                <span class="login-title"><%out.println(text.get("title_app"));%></span>
             </div>
             <div class="login-container-username">
-                <input class="login-container-username-input" type="text" name="username" placeholder="<%out.println(text.getResourcesMap().get("username"));%>">
+                <input class="login-container-username-input" type="text" name="username" placeholder="<%out.println(text.get("username"));%>">
             </div>
             <div class="login-container-password">
-                <input class="login-container-password-input" type="password" name="password" placeholder="<%out.println(text.getResourcesMap().get("password"));%>">
+                <input class="login-container-password-input" type="password" name="password" placeholder="<%out.println(text.get("password"));%>">
             </div>
             <div class="login-container-signin">
-                <button type="submit" class=""><%out.println(text.getResourcesMap().get("login"));%></button>
+                <button type="submit" class=""><%out.println(text.get("login"));%></button>
             </div>
             <div class="login-container-register">              
-                <input type="button" value="<%out.println(text.getResourcesMap().get("register"));%>" onclick="window.location.href='register.jsp'" />
+                <input type="button" value="<%out.println(text.get("register"));%>" onclick="window.location.href='register.jsp'" />
             </div>
             <div class="login-container-social">
                 <button type="submit" id="login-facebook" class="login-facebook">Facebook</button>
