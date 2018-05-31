@@ -19,7 +19,7 @@
         <div class="container">
             <div class="header">
                 <div class="menu"><!--zona donde esta el menu pero como es la pantalla de seleccion de profile solo sale el mail del usuario y tiene la opcion de salir -->
-                    <a>
+                    
                     <ul>
                         <li><a>Logout</a></li>
                         <li><a>PK9BarrisBCN</a></li>
