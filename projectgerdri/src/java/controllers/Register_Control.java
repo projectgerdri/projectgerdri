@@ -8,6 +8,7 @@ import db_objects.User;
 import utils.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
@@ -21,7 +22,6 @@ import models.Register;
 /**Controladora que atiende las peticiones provenientes del JSP de Register */
 @WebServlet(urlPatterns = {"/Register_Control"})
 public class Register_Control extends HttpServlet {
-    Resources db_param;
     DbConnection DBC;  
     
     /**
@@ -33,11 +33,9 @@ public class Register_Control extends HttpServlet {
     @Override
     public void init(ServletConfig cfg) throws ServletException{
         super.init(cfg);
-        int db_selector;//puede que no este bien aqui
         //Seteamos la DB que estamos apuntando
-        db_param = new Resources(getServletContext().getRealPath("/") + "resources/" + "web_parameters.xml");
-        db_param.fillHashMap();
-        db_selector = Integer.parseInt(db_param.getResourcesMap().get("db_param"));
+        Properties db_param = FileParser.getDataFromProperties(getServletContext().getRealPath("/") + "properties/" + "db_params.properties");
+        int db_selector = Integer.parseInt(db_param.getProperty("db_param"));
         
         //Iniciar y testear la conexión con la DB
         DBC = new DbConnection(db_selector);
