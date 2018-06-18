@@ -112,7 +112,7 @@ public class Register {
         DBC.closeConnection();
         
         //Código para enviar el mail de validación de nueva cuenta (de momento enviamos por defecto en español, luego capturar idioma de navegador de usuario)
-        Email validateAccountMail = new Email(userToCInsert, context + "mail-templates/validate-user_lang.html", "es");
+        Email validateAccountMail = new Email(userToCInsert, context, Email.TypeOfMessage.VALIDATE_ACCOUNT, "es");
         validateAccountMail.sendEmail();
         
         return dataRegistered;

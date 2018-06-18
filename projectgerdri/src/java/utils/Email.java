@@ -13,27 +13,19 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.io.IOUtils;
 
 /**
- * Clase de utilidad que permite el envío de correos electrónicos a los usuarios de PTS. Actualmente puede:
- * - Añadir contenido dinámico según el usuario final
- * En un futuro próximo podrá:
- * - Escoger plantillas de mails diferentes según idioma y temática del mensaje
- * - Enviar al usuario un link de validación para activar su cuenta PTS
+ * Clase de utilidad que permite el envío de correos electrónicos a los usuarios de PTS, escogiendo idioma y rellenando dinámicamente parte del contenido
  * @author gurug
  */
 public class Email {
-    //Constantes, posiblemente deban ser movidas a un fichero properties
-    private final String DEFAULT_FROM_ADDRESS = "project.gerdri@gmail.com";
-    private final String DEFAULT_FROM_PASSWORD = "aguaes@gua9333";
-    private final String DEFAULT_SMTP_SERVER = "smtp.gmail.com";    
+    //Datos de configuración almacenados en el fichero properties para la gestión de envío de mail
+    private Properties mailProps;
+    private String specificHeader;
     
-    //Los diferentes tipos de plantillas de mail de los que disponemos
-    public enum TypeOfMessage { VALIDATE_NEW_ACCOUNT, FORGOT_PASSWORD, WELCOME_MESSAGE }
+    //Tipo de mail que podemos enviar
+    public enum TypeOfMessage { VALIDATE_ACCOUNT, WELCOME, DELETE_ACCOUNT }
     
     //Atributos relativos al envío del mail
     private User destinationUser;
-    private String fromAddress;
-    private String fromPass;
-    private String smtpServer;
     private String template;
     private String language;
     private String mailSubject;
@@ -42,35 +34,33 @@ public class Email {
     /**
      * Constructor que crea un mail con la información necesaria para su gestión y envío
      * @param destinationUser Modelo User con la información del jugador que recibirá el mail (así se puede acceder a cualquier información suya que necesitemos)
-     * @param template Tipo de mensaje que se quiere enviar, necesario para rellenar el cuerpo y título del correo electrónico
+     * @param context Ruta genérica desde la cual se pueden acceder luego a recursos como las plantillas de mail o el fichero de propiedades
+     * @param whichMail Tipo de correo electrónico que queremos enviar, a escoger entre las plantillas disponibles
      * @param language Idioma usado por el jugador en su navegador y con el que se elaborará el mail
      */
-    public Email(User destinationUser, String template, String language) {
+    public Email(User destinationUser, String context, TypeOfMessage whichMail, String language) {
+        this.mailProps = FileParser.getDataFromProperties(context + "properties/email.properties");
         this.destinationUser = destinationUser;
-        this.fromAddress = DEFAULT_FROM_ADDRESS;
-        this.fromPass = DEFAULT_FROM_PASSWORD;        
-        this.smtpServer = DEFAULT_SMTP_SERVER;
-        this.template = template;
         this.language = language;
+        this.template = getMailTemplate(context, whichMail, language);
         fillWithDynamicContent();
     }
     
     /**
      * Tras tener el mail preparado con toda la información, este método lo envía siguiendo los pasos establecidos por la librería JavaMail
      */
-    public void sendEmail() {
-        
+    public void sendEmail() {        
         //Rellenamos las propiedades que establecen el modo de envío del mail
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", smtpServer);
+        props.put("mail.smtp.host", mailProps.getProperty("config.SMTP-SERVER"));
         props.put("mail.smtp.port", "587");
 
         //Creamos el objeto sesión necesario para el envío del mail, que se obtiene autenticándonos al SMTP con nuestras credenciales
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromAddress, fromPass);
+                return new PasswordAuthentication(mailProps.getProperty("config.FROM-ADDRESS"), mailProps.getProperty("config.FROM-PASSWORD"));
             }
         });
         
@@ -78,7 +68,7 @@ public class Email {
         //más adelante en caso de fallar
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(fromAddress));
+            message.setFrom(new InternetAddress(mailProps.getProperty("config.FROM-ADDRESS")));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinationUser.getEmail()));
             message.setSubject(mailSubject);
             message.setContent(mailBody, "text/html");
@@ -87,64 +77,75 @@ public class Email {
         catch (MessagingException msge) {
             System.err.println("Couldn't send " + template.toString() + " message to " + destinationUser.getEmail() + ". Should retry before throwing an exception");
             msge.printStackTrace();
-        }        
-
+        }
     }    
     
     /**
      * Método que rellena el título y cuerpo del mensaje según el idioma, plantilla escogida y usuario final
      */
     private void fillWithDynamicContent() {
-        this.mailSubject = "¡Bienvenido!";        
+        mailSubject = mailProps.getProperty(specificHeader + "SUBJECT");
         StringWriter htmlContent = new StringWriter();
         
         //Gracias a la librería Apache Commons IO, parseamos el contenido de la plantilla HTML a un String que se puede enviar por JavaMail
         try {            
-            IOUtils.copy(new FileInputStream(new File(template.replace("_lang", "_" + language))), htmlContent, "utf-8");            
+            IOUtils.copy(new FileInputStream(new File(template)), htmlContent, "utf-8");            
         } catch (IOException ioe) {
             System.err.println("No se ha podido convertir la plantilla HTML a String");
         }
         
-        //De momento reemplazamos el contenido dinámico a pelo, pero próximamente hacerlo con un fichero properties y un bucle apropiado
-        String parsedContent = htmlContent.toString();
-        parsedContent = parsedContent.replace("{NAME}", destinationUser.getFirstName())
-                .replace("{BRAND-NAME}", "Project Team Simulator, PTS").replace("{LINK}", "http://www.marca.com")
-                .replace("{SHORT-BRAND-NAME}", "PTS").replace("{YEAR}", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)));
+        //De momento reemplazamos el contenido dinámico a pelo
+        String parsedContent = htmlContent.toString();        
+        parsedContent = parsedContent.replace("{NAME}", destinationUser.getFirstName()).replace("{YEAR}", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)));
         
-        this.mailBody = parsedContent;        
+        this.setMailBody(parsedContent);
+    }
+    
+    /**
+     * Método con el cual se obtiene la plantilla de mail correcta teniendo en cuenta los siguientes parámetros que recibimos del constructor:
+     * @param context Ruta genérica para acceder a los recursos
+     * @param whichMail Tipo de mail que se quiere enviar, a escoger entre las plantillas disponibles
+     * @param lang Idioma que usa el usuario en su navegador y con el que se enviará el mail
+     * @return Devuelve la ruta completa de la plantilla de mail para que sea seteada en el atributo correspondiente
+     */
+    private String getMailTemplate(String context, TypeOfMessage whichMail, String lang) {
+        String template = context + "mail-templates/";
+        int commonPath = template.length();
+        switch (whichMail) {
+            case VALIDATE_ACCOUNT: template += "validate-user_lang.html"; break;
+            case DELETE_ACCOUNT: template += "delete-user_lang.html"; break;
+            case WELCOME: template += "welcome-user_lang.html"; break;
+            default: template += "welcome-user_lang.html"; break;
+        }
+        template = template.replace("_lang", "_" + lang);
+        specificHeader = template.substring(commonPath, template.length());
+        specificHeader = specificHeader.replace("_", ".").substring(0, specificHeader.indexOf(".html") + 1);
+        return template;
     }
     
     /*GETTERS AND SETTERS*/
+    public Properties getMailProps() {
+        return mailProps;
+    }
+
+    public void setMailProps(Properties mailProps) {
+        this.mailProps = mailProps;
+    }
+    
+    public String getSpecificHeader() {
+        return specificHeader;
+    }
+
+    public void setSpecificHeader(String specificHeader) {
+        this.specificHeader = specificHeader;
+    }
+    
     public User getDestinationUser() {
         return destinationUser;
     }
 
     public void setDestinationUser(User destinationUser) {
         this.destinationUser = destinationUser;
-    }
-
-    public String getFromAddress() {
-        return fromAddress;
-    }
-
-    public void setFromAddress(String fromAddress) {
-        this.fromAddress = fromAddress;
-    }
-
-    public String getFromPass() {
-        return fromPass;
-    }
-
-    public void setFromPass(String fromPass) {
-        this.fromPass = fromPass;
-    }
-
-    public String getSmtpServer() {
-        return smtpServer;
-    }
-
-    public void setSmtpServer(String smtpServer) {
-        this.smtpServer = smtpServer;
     }
 
     public String getTemplate() {
