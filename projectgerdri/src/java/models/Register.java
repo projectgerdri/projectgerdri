@@ -3,6 +3,7 @@ package models;
 import db_objects.User;
 import java.sql.SQLException;
 import utils.DbConnection;
+import utils.Email;
 import utils.Encrypt;
 
 /** Modelo encargado de atender a las peticiones relativas al Registro del usuario
@@ -84,7 +85,7 @@ public class Register {
      * @param DBC Instancia de la clase de conexión con la base de datos mediante la cual se podrá hacer la query
      * @return Devuelve un <b>boolean</b> respondiendo a la pregunta de si se ha podido insertar el nuevo usuario en DB o no
      */
-    public boolean dataNewUserInsert(User userToCInsert, DbConnection DBC) throws SQLException {//Retorna true or false depndiendo si se ha insertado en la BD
+    public boolean dataNewUserInsert(User userToCInsert, DbConnection DBC, String context) throws SQLException {//Retorna true or false depndiendo si se ha insertado en la BD
         boolean dataRegistered = false;//por defecto entendemos que no se ha insertado
         encryption = new Encrypt(userToCInsert.getEmail(), userToCInsert.getPassword(), userToCInsert.getUsername());//encriptado
         encryption.encryptPass();
@@ -97,18 +98,22 @@ public class Register {
                 + "'"+userToCInsert.getBirthDate()+"', "//cambiar por la fecha
                 + "'"+userToCInsert.getEmail()+"', "
                 + "'"+userToCInsert.getUsername()+"', "
-                + "'"+userToCInsert.getNickname()+"', " //por ahora es el mismo, más adelante se cambia
+                + "'"+userToCInsert.getUsername()+"', " //por ahora es el mismo, más adelante se cambia
                 + "'"+userToCInsert.getPassword()+"')";
-        //Ya no se pone fecha de registro aquí porque actúa como campo "activated" y se rellenará cuando el usuario valide a través de mail su cuenta
+                
         
         DBC.openConnection(registerQuery);
         try{
             DBC.set.executeUpdate(registerQuery);
-            dataRegistered = true;
+            dataRegistered = true;            
         } catch (Exception e){
             System.out.println("Problemas en el insert: " +e.getMessage());
         }
         DBC.closeConnection();
+        
+        //Código para enviar el mail de validación de nueva cuenta (de momento enviamos por defecto en español, luego capturar idioma de navegador de usuario)
+        Email validateAccountMail = new Email(userToCInsert, context, Email.TypeOfMessage.VALIDATE_ACCOUNT, "es");
+        validateAccountMail.sendEmail();
         
         return dataRegistered;
     }

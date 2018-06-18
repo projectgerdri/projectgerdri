@@ -26,7 +26,7 @@ public class DbConnection {
         
         switch (connectionMode) {
             case 0: //local
-                dbUrl = "jdbc:mysql://localhost/project_gerdri";
+                dbUrl = "jdbc:mysql://127.0.0.1/project_gerdri";
                 userName = "root";
                 password = ""; break;
             case 1: //desarrollo

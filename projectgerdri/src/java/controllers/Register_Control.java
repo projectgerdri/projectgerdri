@@ -92,7 +92,7 @@ public class Register_Control extends HttpServlet {
             userToInsert.setUsername(userToCheck.getUsername());
             userToInsert.setPassword(userToCheck.getPassword());
             userToInsert.setBirthDate(userToCheck.getBirthDate());
-            register.dataNewUserInsert(userToInsert, DBC);
+            register.dataNewUserInsert(userToInsert, DBC, getServletContext().getRealPath("/"));
         }else if(check == 1){
             //falla username
             response.sendRedirect(response.encodeRedirectURL("./register.jsp?e1"));
